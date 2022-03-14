@@ -1,14 +1,11 @@
 function finalproject(){
     var filePath="data.csv";
     question1(filePath);
+    question2(filePath);
     question3(filePath);
     question4(filePath);
     question5(filePath);
-    /*
-    question2(filePath);
 
-
-     */
 }
 
 var question1=function(filePath){
@@ -24,7 +21,6 @@ var question1=function(filePath){
     d3.csv(filePath, rowConverter).then(function (data) {
 
         let new_data = data.filter(d => (d.Age <= 100 && d.Age >= 18 && d.Job_title === "data scientist"));
-        console.log(new_data)
 
         var svgheight = 600;
         var svgwidth = 600;
@@ -39,7 +35,6 @@ var question1=function(filePath){
                 d3.max(new_data, function(d){ return d.Age + 20;})])
             .range([0, svgwidth-padding]);
 
-        console.log( d3.max(new_data, function(d){ return d.Average_salary;}))
         var yScale = d3.scaleLinear()
             .domain([d3.min(new_data, function(d){ return d.Average_salary;}),
                 d3.max(new_data, function(d){ return d.Average_salary;})])
@@ -88,6 +83,82 @@ var question1=function(filePath){
 
 }
 
+var question2=function(filePath){
+
+    var rowConverter = function (d) {
+        return { Job_title : d['job_title_sim'],
+            Average_salary : parseFloat(d['Avg Salary(K)']),
+            Rating: parseFloat(d['Rating'])
+
+        };
+    }
+    d3.csv(filePath, rowConverter).then(function (data) {
+        console.log(data)
+
+        const unique = (value, index, self) => {
+            return self.indexOf(value) === index
+        }
+
+        var myGroups = d3.map(data, function(d){return d.Job_title;}).filter(unique).sort((a, b) => d3.descending(a.Job_title, b.Job_title))
+        console.log(data.filter(d => d.Job_title === "data scientist"))
+        var table = [];
+        for (let i = 0; i < myGroups.length; i++) {
+            if (myGroups[i] !== "na")
+                table.push({Job_title: myGroups[i], Avg_Rating: d3.rollup(data.filter(d => d.Job_title === myGroups[i]), v => d3.mean(v, d => d.Rating))})
+        }
+        console.log(table)
+
+        var svgheight = 600;
+        var svgwidth = 600;
+        var padding = 100;
+
+        var svg = d3.select("#q2_plot").append("svg")
+            .attr("height", svgheight)
+            .attr("width", svgwidth);
+
+        var xScale = d3.scaleBand()
+            .range([ padding, svgwidth - padding])
+            .domain(table.map(d => d.Job_title))
+            .padding(0.4);
+
+        var yScale = d3.scaleLinear()
+            .domain([0, d3.max(table, function(d){return d.Avg_Rating;})])
+            .range([svgheight-padding, 0])
+            .range([svgheight-padding, padding])
+
+        var rects = svg.selectAll("rect")
+            .data(table).enter().append("rect")
+            .attr("x", function (d, i) {
+                return xScale(d.Job_title);
+            })
+            .attr("y", function (d) {
+                return yScale(d.Avg_Rating) - 50;
+            })
+            .attr("width", xScale.bandwidth())
+            .attr("height", function (d) {
+                return svgheight - padding - yScale(d.Avg_Rating);
+            })
+            .attr("fill", "#69b3a2")
+
+        var xAxis = d3.axisBottom().scale(xScale);
+        var yAxis = d3.axisLeft().scale(yScale);
+
+        svg.append("g").call(xAxis)
+            .attr("class","xAxis")
+            .attr("transform", "translate(-0, 450)")
+            .selectAll("text")
+            .attr("transform", "translate(-10,0)rotate(-30)")
+            .style("text-anchor", "end");
+
+        svg.append("g").call(yAxis)
+            .attr("class","yAxis")
+            .attr("transform", "translate(100, -50)")
+
+    });
+
+
+}
+
 var question3=function(filePath){
 
     var rowConverter = function (d) {
@@ -116,7 +187,6 @@ var question3=function(filePath){
 
 
         // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
-
         const unique = (value, index, self) => {
             return self.indexOf(value) === index
         }
@@ -125,7 +195,6 @@ var question3=function(filePath){
         var myVars = d3.map(data, function(d){return d.Size;}).filter(unique).sort((a, b) => d3.descending(a.Size, b.Size))
 
         // var = ['1 - 50', '51 - 200', '201 - 500', '501 - 1000', '1001 - 5000', '5001 - 10000', '10000+', 'unknown']
-
 
         // Build X scales and axis:
         var x = d3.scaleBand()
@@ -155,7 +224,6 @@ var question3=function(filePath){
             .interpolator(d3.interpolateInferno)
             .domain([d3.min(data, function(d) { return d.Avg_Salary }), d3.max(data, function(d) { return d.Avg_Salary })])
 
-
         var Tooltip=d3.select('#q3_plot').append('div').style('opacity',1).attr("style", "position: absolute");
 
         // add the squares
@@ -175,7 +243,6 @@ var question3=function(filePath){
             .style("opacity", 0.8)
             .on("mouseover",(e,d)=>{
                 Tooltip.transition().duration(100).style("opacity",1);
-                console.log(e,d)
                 Tooltip.html('Average Salary: '+d.Avg_Salary.toFixed(2)).style("left",e.pageX +"px").style("top",e.pageY+"px");
             })
             .on("mousemove",(e,d)=>{
@@ -232,9 +299,6 @@ var question4=function(filePath){
 
         };
 
-        console.log(q1);
-
-
         q1keys = Object.keys(q1);
 
         counts = [];
@@ -244,7 +308,6 @@ var question4=function(filePath){
 
         var stack = d3.stack().keys(["P", "M", "na"]);
         var series = stack(counts);
-        console.log(series);
 
         var svgheight = 500;
         var svgwidth = 1400;
@@ -284,7 +347,6 @@ var question4=function(filePath){
 
         var rects = groups.selectAll("rect")
             .data(function(d){
-                console.log(d);
                 return d;
             }).enter().append("rect")
             .attr("x", function(d,i){
@@ -362,8 +424,6 @@ var question5=function(filePath){
         var interQuantileRange = q3 - q1
         var min = q1 - 1.5 * interQuantileRange
         var max = q1 + 1.5 * interQuantileRange
-
-        console.log(q3)
 
         // Show the Y scale
         var y = d3.scaleLinear()

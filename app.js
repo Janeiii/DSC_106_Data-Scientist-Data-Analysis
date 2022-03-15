@@ -49,8 +49,6 @@ var question1=function(filePath){
                 d3.max(new_data, function(d){ return d.Average_salary;})])
             .range([svgheight-padding, padding]);
 
-
-
         var highlight = function(e,d){
             selected_title = d.Job_title
 
@@ -71,8 +69,12 @@ var question1=function(filePath){
             d3.selectAll(".dot")
                 .transition()
                 .duration(200)
-                .style("fill", "lightgrey")
-                .attr("r", 5 )
+                .style("fill", function(d){
+                    if(d.Job_title === "datascientist")
+                        return "red";
+                    else
+                        return "#69b3a2";
+                })
         }
 
         var gScatter = svg.append('g')
@@ -177,6 +179,7 @@ var question2=function(filePath){
 
         var rects = svg.selectAll("rect")
             .data(table).enter().append("rect")
+
             .attr("x", function (d, i) {
                 return xScale(d.Job_title);
             })

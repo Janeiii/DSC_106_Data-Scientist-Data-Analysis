@@ -19,9 +19,9 @@
     topic under its corresponded section.
 
     <h2>Introduction: </h2>
-    Data science is such an up-and-rising field across the industries. As a future data scientist, we are interested in finding the salary expectations as a data scientist as we are
-        all about to graduate and step onto the professional field. Studying this particular dataset would help us get a better
-        sight of what skill sets and salary we will be expecting in the future and also to know more about different companies
+    Data science is such an up-and-rising field across the industries. As a future data scientist, we are interested in finding different aspects and expectations of being a data scientist.
+    As we are all about to graduate and step onto the professional field. Studying this particular dataset would help us get a better
+        sight of the skill sets required and what we will be expecting in the future, to get ourselves acquainted and prepared. It is also a good experience to get familiarize with different companies
         that have job opportunities so that we can prepare ourselves.
     <br><br>Here's a snapshot of the data that we will be using in this project:
 <br>
@@ -34,19 +34,26 @@
         <div>
             <h2 class="section">PART A - D3 Programming</h2>
             <h3>Q. What is the relationship between age and average salary of data scientists?</h3>
-            Note: Scatter plot is extremely useful in finding correlations between the variables( Age & avg. Salaries in this case.) Thus, we will be applying the graph using age as x-axis and avg. salary as y-axis to conduct the analysis. <br>
-            Data Cleaning: This dataset contains ages ranging from -1 to 234. We will only be selecting age between 18 and 100 as our critical data as range outside are extreme values that we considered unlikely happen in our life.
+            </div>
+            Note: Scatter plot is extremely useful in finding correlations between the variables( Age & avg. Salaries in this case.) Thus, we will be applying the graph using age as x-axis and avg. salary as y-axis to conduct the analysis. <br><br>
+            Data Cleaning: This dataset contains ages ranging from -1 to 234 and unrelated careers. We will only be selecting age between 18 and 100 as our critical data as range outside are extreme values that we considered unlikely happen in our life, as well as taking unrelated and invalid careers(such as director and NAs) out of the research.
         <div id="q1">
         </div>
         <h4>Plot:</h4>
             <div id="q1_plot" class="center_plot">
         </div>
-            <h4>Findings to the visualization: Although the data are widely spread out, we could still see a small upward trending happening in the graph, for which it tells us that age and average salaries of data scientist are somehow correlated and a greater age could potentially result a higher average salary.</h4>
+            <h4>Findings to the visualization</h4> The graph shown that there is a positive relationship between age and average salary of being a data scientist. The positive trend gives the proof. <br>
+            In addition, we also observed that data scientists have a higher mean salary on average comparing to the other related field, such as data engineers, data modeler, and analysts.
+            Careers such as data analysts and data engineer even has a negative trend towards relationship between age and average salary. <br><br>
+
+            <h4>Color, Marks, and Channels</h4>
             Color scheme: Categorical; (d3.scaleOrdinal) <br>
             Marks: Points <br>
             Channel: position, color<br>
 
-            <h3>Q. What is the relationship between job title and the rating of data scientists? => Barchart</h3>
+            <h3>Q. What are the average ratings between different careers versus data scientists? </h3>
+            Data Cleaning: This dataset contains ages ranging from -1 to 234 and unrelated careers. We will only be selecting age between 18 and 100 as our critical data as range outside are extreme values that we considered unlikely happen in our life, as well as taking unrelated and invalid careers(such as director and NAs) out of the research.
+
             <div id="q2">
             </div>
             <h4>Plot:</h4>

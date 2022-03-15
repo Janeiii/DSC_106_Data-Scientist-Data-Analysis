@@ -20,7 +20,7 @@ var question1=function(filePath){
     }
     d3.csv(filePath, rowConverter).then(function (data) {
 
-        let new_data = data.filter(d => (d.Age <= 100 && d.Age >= 18 && d.Job_title !== "na"));
+        let new_data = data.filter(d => (d.Age <= 100 && d.Age >= 18 && d.Job_title !== "na" && d.Job_title !== "director"));
 
         const unique = (value, index, self) => {
             return self.indexOf(value) === index
@@ -30,7 +30,7 @@ var question1=function(filePath){
 
         console.log(myGroups)
         var myColor = d3.scaleOrdinal().domain(myGroups)
-            .range(["red", "blue", "green", "gold", "darkgreen", "pink", "brown", "slateblue", "orange"])
+            .range(["red", "blue", "green", "gold", "darkgreen", "pink", "brown", "slateblue"])
 
         var svgheight = 600;
         var svgwidth = 600;
@@ -129,26 +129,25 @@ var question2=function(filePath){
 
     var rowConverter = function (d) {
         return { Job_title : d['job_title_sim'],
-            Average_salary : parseFloat(d['Avg Salary(K)']),
-            Rating: parseFloat(d['Rating'])
+            Rating: parseFloat(d['Rating']),
+            Age: parseInt(d['Age'])
 
         };
     }
     d3.csv(filePath, rowConverter).then(function (data) {
-        console.log(data)
+
+        let new_data = data.filter(d => (d.Age <= 100 && d.Age >= 18 && d.Job_title !== "na" ));
 
         const unique = (value, index, self) => {
             return self.indexOf(value) === index
         }
 
-        var myGroups = d3.map(data, function(d){return d.Job_title;}).filter(unique).sort((a, b) => d3.descending(a.Job_title, b.Job_title))
-        console.log(data.filter(d => d.Job_title === "data scientist"))
+        var myGroups = d3.map(new_data, function(d){return d.Job_title;}).filter(unique).sort((a, b) => d3.descending(a.Job_title, b.Job_title))
+
         var table = [];
         for (let i = 0; i < myGroups.length; i++) {
-            if (myGroups[i] !== "na")
-                table.push({Job_title: myGroups[i], Avg_Rating: d3.rollup(data.filter(d => d.Job_title === myGroups[i]), v => d3.mean(v, d => d.Rating))})
+            table.push({Job_title: myGroups[i], Avg_Rating: d3.rollup(new_data.filter(d => d.Job_title === myGroups[i]), v => d3.mean(v, d => d.Rating))})
         }
-        console.log(table)
 
         var svgheight = 600;
         var svgwidth = 600;

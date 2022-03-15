@@ -35,16 +35,16 @@
             <h2 class="section">PART A - D3 Programming</h2>
             <h3>Q. What is the relationship between age and average salary of data scientists?</h3>
             Note: Scatter plot is extremely useful in finding correlations between the variables( Age & avg. Salaries in this case.) Thus, we will be applying the graph using age as x-axis and avg. salary as y-axis to conduct the analysis. <br>
-            Data Cleaning: We will be selecting range of 18 < Age < 100 as our critical data as range outside does not meet the ethical purpose, and only data scientist would be considered.
+            Data Cleaning: This dataset contains ages ranging from -1 to 234. We will only be selecting age between 18 and 100 as our critical data as range outside are extreme values that we considered unlikely happen in our life.
         <div id="q1">
         </div>
         <h4>Plot:</h4>
             <div id="q1_plot" class="center_plot">
         </div>
             <h4>Findings to the visualization: Although the data are widely spread out, we could still see a small upward trending happening in the graph, for which it tells us that age and average salaries of data scientist are somehow correlated and a greater age could potentially result a higher average salary.</h4>
-            Color scheme: None <br>
-            Marks: lines <br>
-            Channel: length, color<br>
+            Color scheme: Categorical; (d3.scaleOrdinal) <br>
+            Marks: Points <br>
+            Channel: position, color<br>
 
             <h3>Q. What is the relationship between job title and the rating of data scientists? => Barchart</h3>
             <div id="q2">

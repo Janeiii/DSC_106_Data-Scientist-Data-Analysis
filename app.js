@@ -12,7 +12,7 @@ var question1=function(filePath){
 
 
     var rowConverter = function (d) {
-        return { Job_title : d['job_title_sim'],
+        return { Job_title : d['job_title_sim'].split(" ").join(""),
             Average_salary : parseFloat(d['Avg Salary(K)']),
             Age: parseInt(d['Age'])
 
@@ -20,7 +20,17 @@ var question1=function(filePath){
     }
     d3.csv(filePath, rowConverter).then(function (data) {
 
-        let new_data = data.filter(d => (d.Age <= 100 && d.Age >= 18 && d.Job_title === "data scientist"));
+        let new_data = data.filter(d => (d.Age <= 100 && d.Age >= 18 && d.Job_title !== "na"));
+
+        const unique = (value, index, self) => {
+            return self.indexOf(value) === index
+        }
+
+        var myGroups = d3.map(new_data, function(d){return d.Job_title;}).filter(unique).sort((a, b) => d3.descending(a.Job_title, b.Job_title))
+
+        console.log(myGroups)
+        var myColor = d3.scaleOrdinal().domain(myGroups)
+            .range(["red", "blue", "green", "gold", "darkgreen", "pink", "brown", "slateblue", "orange"])
 
         var svgheight = 600;
         var svgwidth = 600;
@@ -40,9 +50,34 @@ var question1=function(filePath){
                 d3.max(new_data, function(d){ return d.Average_salary;})])
             .range([svgheight-padding, padding]);
 
+        var highlight = function(e,d){
+            selected_title = d.Job_title
 
-        svg.selectAll("circle")
+            d3.selectAll(".dot")
+                .transition()
+                .duration(200)
+                .style("fill", "lightgrey")
+                .attr("r", 3)
+
+            d3.selectAll("." + selected_title)
+                .transition()
+                .duration(200)
+                .style("fill", myColor(selected_title))
+                .attr("r", 4)
+        }
+
+        var doNotHighlight = function(){
+            d3.selectAll(".dot")
+                .transition()
+                .duration(200)
+                .style("fill", "lightgrey")
+                .attr("r", 5 )
+        }
+
+        svg.append('g')
+            .selectAll("dot")
             .data(new_data).enter().append("circle")
+            .attr("class", function (d) { return "dot " + d.Job_title } )
             .attr("cx", function (d){
                 return xScale(d.Age) + 65;
             })
@@ -51,8 +86,14 @@ var question1=function(filePath){
             })
             .attr("r", 3)
             .attr("opacity", 0.5)
-            .style("fill", "#69b3a2")
-
+            .style("fill", function(d){
+                if(d.Job_title === "datascientist")
+                    return "red";
+                else
+                    return "#69b3a2";
+            })
+            .on("mouseover", highlight)
+            .on("mouseleave", doNotHighlight )
         /*
         svg.selectAll("text")
             .data(new_data).enter().append("text")
@@ -64,6 +105,7 @@ var question1=function(filePath){
             })
             .text(function(d){ return "Age: "+  d.Age + " " + "Salary: " + d.Average_salary;})
             .attr("font-size", 8);
+
 
          */
         var xAxis = d3.axisBottom().scale(xScale);

@@ -28,7 +28,6 @@ var question1=function(filePath){
 
         var myGroups = d3.map(new_data, function(d){return d.Job_title;}).filter(unique).sort((a, b) => d3.descending(a.Job_title, b.Job_title))
 
-        console.log(myGroups)
         var myColor = d3.scaleOrdinal().domain(myGroups)
             .range(["red", "blue", "green", "gold", "darkgreen", "pink", "brown", "slateblue"])
 
@@ -49,6 +48,8 @@ var question1=function(filePath){
             .domain([d3.min(new_data, function(d){ return d.Average_salary;}),
                 d3.max(new_data, function(d){ return d.Average_salary;})])
             .range([svgheight-padding, padding]);
+
+
 
         var highlight = function(e,d){
             selected_title = d.Job_title
@@ -74,7 +75,7 @@ var question1=function(filePath){
                 .attr("r", 5 )
         }
 
-        svg.append('g')
+        var gScatter = svg.append('g')
             .selectAll("dot")
             .data(new_data).enter().append("circle")
             .attr("class", function (d) { return "dot " + d.Job_title } )
@@ -94,6 +95,11 @@ var question1=function(filePath){
             })
             .on("mouseover", highlight)
             .on("mouseleave", doNotHighlight )
+
+        function changeSize(size) {
+            gScatter
+                .attr('r',size)
+        }
         /*
         svg.selectAll("text")
             .data(new_data).enter().append("text")
@@ -105,7 +111,6 @@ var question1=function(filePath){
             })
             .text(function(d){ return "Age: "+  d.Age + " " + "Salary: " + d.Average_salary;})
             .attr("font-size", 8);
-
 
          */
         var xAxis = d3.axisBottom().scale(xScale);
@@ -120,6 +125,9 @@ var question1=function(filePath){
             .attr("class", "yAxis")
             .attr("transform", "translate(50,5)")
 
+        d3.select("#mySlider").on("change", function(d){
+            changeSize(this.value)
+        })
     });
 
 

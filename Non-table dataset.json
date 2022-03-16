@@ -1,0 +1,97 @@
+{
+  "players": [
+    {
+      "kit_number": 1,
+      "name": "Courtois"
+    },
+    {
+      "kit_number": 2,
+      "name": "Mendy"
+    },
+    {
+      "kit_number": 3,
+      "name": "Ramos"
+    },
+    {
+      "kit_number": 4,
+      "name": "Benzema"
+    },
+    {
+      "kit_number": 5,
+      "name": "Bale"
+    },
+    {
+      "kit_number": 6,
+      "name": "Modric"
+    },
+    {
+      "kit_number": 7,
+      "name": "Kroos"
+    },
+    {
+      "kit_number": 8,
+      "name": "Hazard"
+    },
+    {
+      "kit_number": 9,
+      "name": "Mbappe"
+    },
+    {
+      "kit_number": 10,
+      "name": "Kante"
+    }
+  ],
+  "Passing Stats": [
+
+    {
+      "Player_passing": 1,
+      "Player_receiving": 2,
+      "No_of_Passes": 36
+    },
+    {
+      "Player_passing": 1,
+      "Player_receiving": 3,
+      "No_of_Passes": 12
+    },
+    {
+      "Player_passing": 2,
+      "Player_receiving": 7,
+      "No_of_Passes": 18
+    },
+    {
+      "Player_passing": 3,
+      "Player_receiving": 10,
+      "No_of_Passes": 55
+    },
+
+    {
+      "Player_passing": 10,
+      "Player_receiving": 5,
+      "No_of_Passes": 17
+    },
+    {
+      "Player_passing": 5,
+      "Player_receiving": 6,
+      "No_of_Passes": 98
+    },
+    {
+      "Player_passing": 9,
+      "Player_receiving": 5,
+    },
+    {
+      "Player_passing": 3,
+      "Player_receiving": 2,
+      "No_of_Passes": 66
+    },
+    {
+      "Player_passing": 10,
+      "Player_receiving": 2,
+      "No_of_Passes": 85
+    },
+    {
+      "Player_passing": 7,
+      "Player_receiving": 9,
+      "No_of_Passes": 55
+    },
+  ]
+}

@@ -95,7 +95,6 @@
     </div>
 <h2 class="section">PART B - Conceptual Questions</h2>
 <h4>Refer to vis on the follow link: <a href="https://public.tableau.com/app/profile/christopher.jez/viz/StreamingServiceComparisons/Streaming101"> https://public.tableau.com/app/profile/christopher.jez/viz/StreamingServiceComparisons/Streaming101</a></h4>
-
 <table>
     <tr>
         <th>Questions</th>
@@ -103,11 +102,14 @@
     </tr>
     <tr>
         <td>What is the “Why” of this visualization?</td>
-        <td>Are the streaming services worth the money to subscribe for households?</td>
+        <td>To determine whether the services are worth to subscribe by
+            visualizing the amount of stream service, the show and movie ratings,
+            the categories and the total shows and movies of the four streaming
+            service providers: Disney+, Hulu, Netflix and Prime video.</td>
     </tr>
     <tr>
         <td>“What” is the dataset type, the data types and availability? (Explain only Disney Data)</td>
-        <td>Dataset type: Table, Data type: Items, Attributes(Quantitative, Sequential, Categorical, Ordinal)</td>
+        <td>Dataset type: Table, Data type: Items(Shows), Attributes(Quantitative, Sequential, Categorical, Ordinal), Availability: Static(because the dateset is fixed and won't be updated)</td>
     </tr>
     <tr>
         <td>There are multiple plots in the link. Identify any 3 unique plots and for each plot analyze the “How”. More specifically, list down the - <br>
@@ -120,15 +122,32 @@
             - Does the plot obey the effectiveness principle with respect to the channel rankings framework? Justify your answer. If you think the plot is not effective, suggest alternative plots. Clearly list down the marks and channels in your approach.
         </td>
         <td>"Categories" : <br>
-            - Plot type: Bubble <br>
-            - Marks: Points, Channels: Size(area),Color(hue) <br>
-            - Keys: Streaming Services(Amazon, Disney, Hulu, Netflix), Values: Categories(eg. Action, Adventure & Action, Adventure - Action, etc ) <br>
-            - Data encoding method: Axis Orientation(Radial) <br>
-            - Manipulate method:  <br>
-            - Facet method:  <br>
-            - No,  <br>
+            - Plot type: Node-link diagram <br>
+            - Marks: Area, Channels: Size(area),Color(hue) <br>
+            - Keys: Streaming Services(Amazon, Disney, Hulu, Netflix), Values: Categories(eg. Action, Adventure & Action, Adventure - Action, etc ), Units <br>
+            - Data encoding method: Area marks, separate and align key with horizontal position, express value with size, separate categories with color<br>
+            - Manipulate method: Select, click to select streaming service,and show categories. Slicing and zoom in by only selecting one category in one service. Constrained by dragging mouse  <br>
+            - Facet method:  The four other plots are juxtaposed with this node-link diagram, select the service provider will also apply to other plots<br>
+            - This visualization is in the middle of the channel ranking framework, it can be more effective by changing the marks to lines, and keeping channels the same would create a stacked bar chart, which would be more effective.<br>
             <br>
-            <br></td>
+            "Total Shows & Movies" : <br>
+            - Plot type: Bar chart <br>
+            - Marks: Line, Channels: Size(length),Color(hue) <br>
+            - Keys: Streaming Services(Amazon, Disney, Hulu, Netflix), Values: Units(total shows) <br>
+            - Data encoding method: Area marks, separate and align key with horizontal position, express value with size, separate categories with color<br>
+            - Manipulate method: Select, click on the bar to select the service, click on the sort button to sort the value  <br>
+            - Facet method:  The four other plots are juxtaposed with this bar chart, select the service provider will also apply to other plots<br>
+            - Yes, because the channels of this visualization is length and color, it is very effective in the channel rankings framework.<br>
+            <br>
+            "Release Year" : <br>
+            - Plot type: Connected scatter plot <br>
+            - Marks: Points, Channels: Position,Color(hue) <br>
+            - Keys: Streaming Services(Amazon, Disney, Hulu, Netflix), Release Year, Values: Units(total shows) <br>
+            - Data encoding method: Points marks, connected with lines, separate and align released years key with vertical position, express service provider key with color hues, express value with horizontal position<br>
+            - Manipulate method: Select, click on the point to select the service provider and the value itself<br>
+            - Facet method:  The four other plots are juxtaposed with this scatter plot, select the service provider will also apply to other plots<br>
+            - Yes, because the channels of this visualization is position and color, it is very effective in the channel rankings framework.<br>
+            </td>
     </tr>
 </table>
 
